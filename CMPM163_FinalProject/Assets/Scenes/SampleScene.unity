@@ -489,9 +489,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03544770db5e77b4db64776ca3fd16ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  open: 0
-  closedXRot: 0
-  openXRot: -130
+  psxRot: 1
+  psxRotAmount: {x: 0, y: 0, z: 0}
+  lidOpen: 0
+  lidClosedXRot: 0
+  lidOpenXRot: -130
   lid: {fileID: 982043611}
 --- !u!114 &1715706622
 MonoBehaviour:
