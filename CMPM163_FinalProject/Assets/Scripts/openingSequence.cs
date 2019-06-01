@@ -20,6 +20,7 @@ public class openingSequence : MonoBehaviour
     public float holdTimer;
 
     public VideoPlayer[] vids;
+    public AudioSource[] ambientAudio;
 
     void Start()
     {
@@ -40,11 +41,23 @@ public class openingSequence : MonoBehaviour
 
             vids[0].enabled = false;
             vids[1].enabled = true;
+
+
+            if (ambientAudio[0].volume < 1) {
+                ambientAudio[0].volume += 0.001f;
+            }
+            else {
+                ambientAudio[0].volume = 1;
+            }
+            ambientAudio[1].volume = ambientAudio[0].volume;
         }
         else {
             holdTimer--;
             vids[0].enabled = true;
             vids[1].enabled = false;
+
+            ambientAudio[0].volume = 0.2f;
+            ambientAudio[1].volume = 0.2f;
         }
 
         // slowly bring in light
