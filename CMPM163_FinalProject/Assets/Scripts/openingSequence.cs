@@ -13,7 +13,8 @@ public class openingSequence : MonoBehaviour
     public float zStart;
     public float yEnd;
     public float zEnd;
-    public float camPanSpeed = 0.04f;
+    public float camPanSpeedDest = 0.04f;
+    private float camPanSpeed = 0;
     public float holdTimer;
 
     void Start()
@@ -25,6 +26,7 @@ public class openingSequence : MonoBehaviour
     void Update()
     {
         if (holdTimer <= 0) {
+            camPanSpeed = Approach(camPanSpeed, camPanSpeedDest, camPanSpeedDest / 200);
             var newY = Approach(transform.position.y, yEnd, camPanSpeed);
             var newZ = Approach(transform.position.z, zEnd, camPanSpeed);
             transform.position = new Vector3(0, newY, newZ);
@@ -34,10 +36,10 @@ public class openingSequence : MonoBehaviour
         }
 
         // slowly bring in light
-        if (Mathf.Abs(transform.position.z - zEnd) < (Mathf.Abs(zStart - zEnd) / 2)) {
+        if (Mathf.Abs(transform.position.z - zEnd) < (Mathf.Abs(zStart - zEnd) * 0.9f)) {
             // flicker light
             ceilingLight.intensity += Random.Range(-0.03f, 0.03f);
-            lightIntensityMin += 0.01f;
+            lightIntensityMin += 0.005f;
             lightIntensityMin = Mathf.Min(lightIntensityMin, 0.75f);
         }
         ceilingLight.intensity = Mathf.Clamp(ceilingLight.intensity, lightIntensityMin, 1.5f);
