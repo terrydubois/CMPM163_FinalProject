@@ -17,6 +17,12 @@ public class psxOpen : MonoBehaviour
 
     public GameObject lid;
     public GameObject cam;
+    public GameObject disc;
+    public bool discIn = false;
+    public float discInY = 0;
+    public float discOutY = 0;
+    public float discRotX = 0;
+    private float discRotXCurrent = 0;
 
     void Start()
     {
@@ -50,7 +56,6 @@ public class psxOpen : MonoBehaviour
         // if camera is pulled back and the player clicks, orient the console and open the lid
         if (cam.GetComponent<openingSequence>().camSequenceOver) {
             if (Input.GetMouseButtonDown(0)) {
-                Debug.Log("here");
                 if (psxRot) {
                     psxRot = false;
                 }
@@ -58,7 +63,22 @@ public class psxOpen : MonoBehaviour
                     lidOpen = !lidOpen;
                 }
             }
+
+            if (Input.GetKeyDown(KeyCode.Space) && lidOpen) {
+                discIn = !discIn;
+            }
         }
+
+
+
+        // bring disc in and out of console
+        var discYDest = (discIn) ? discInY : discOutY;
+        disc.transform.position = new Vector3(disc.transform.position.x,
+                                        ApproachSmooth(disc.transform.position.y, discYDest, 20),
+                                        disc.transform.position.z);
+        var discRotXDest = (discIn) ? 0 : 360;
+        discRotXCurrent = ApproachSmooth(discRotXCurrent, discRotXDest, 12);
+        disc.transform.rotation = Quaternion.Euler(discRotXCurrent, 0, 0);
     }
 
 
