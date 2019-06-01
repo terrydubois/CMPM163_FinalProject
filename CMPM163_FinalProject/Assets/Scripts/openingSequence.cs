@@ -50,9 +50,9 @@ public class openingSequence : MonoBehaviour
         // slowly bring in light
         if (Mathf.Abs(transform.position.z - zEnd) < (Mathf.Abs(zStart - zEnd) * 0.9f)) {
             // flicker light
-            ceilingLight.intensity += Random.Range(-0.03f, 0.03f);
+            ceilingLight.intensity += Random.Range(-0.06f, 0.06f);
             lightIntensityMin += 0.005f;
-            lightIntensityMin = Mathf.Min(lightIntensityMin, 0.75f);
+            lightIntensityMin = Mathf.Min(lightIntensityMin, 1.0f);
         }
         ceilingLight.intensity = Mathf.Clamp(ceilingLight.intensity, lightIntensityMin, 1.5f);
 
