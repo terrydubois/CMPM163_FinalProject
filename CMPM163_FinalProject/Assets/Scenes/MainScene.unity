@@ -377,14 +377,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 534669902}
+  screen: {fileID: 1107083115}
   ceilingLight: {fileID: 860205315}
   camSequenceOver: 0
   yStart: 25
   zStart: -5.6
   yEnd: 12.9
   zEnd: 34.9
-  camPanSpeed: 0.04
-  holdTimer: 650
+  camPanSpeedDest: 0.04
+  holdTimer: 800
+  vids: []
 --- !u!82 &534669907
 AudioSource:
   m_ObjectHideFlags: 0
@@ -839,6 +841,7 @@ GameObject:
   - component: {fileID: 1107083117}
   - component: {fileID: 1107083116}
   - component: {fileID: 1107083120}
+  - component: {fileID: 1107083121}
   m_Layer: 0
   m_Name: Screen
   m_TagString: Untagged
@@ -951,6 +954,40 @@ VideoPlayer:
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
   m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+--- !u!328 &1107083121
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1107083115}
+  m_Enabled: 0
+  m_VideoClip: {fileID: 32900000, guid: d9edd0252b736cc428116a9f9269062c, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: f81de635a439120409f4d27bb51499c9, type: 2}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: _MainTex
+  m_RenderMode: 2
+  m_AspectRatio: 5
+  m_DataSource: 0
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources:
+  - {fileID: 0}
+  m_DirectAudioVolumes:
+  - 1
+  m_Url: 
+  m_EnabledAudioTracks: 01
+  m_DirectAudioMutes: 00
+  m_ControlledAudioTrackCount: 1
+  m_PlayOnAwake: 1
+  m_SkipOnDrop: 1
+  m_Looping: 1
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
 --- !u!4 &1264512205 stripped

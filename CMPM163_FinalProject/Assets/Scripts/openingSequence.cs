@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class openingSequence : MonoBehaviour
 {
     public GameObject cam;
+    public GameObject screen;
     public Light ceilingLight;
     private float lightIntensityMin = 0;
 
@@ -17,22 +19,32 @@ public class openingSequence : MonoBehaviour
     private float camPanSpeed = 0;
     public float holdTimer;
 
+    public VideoPlayer[] vids;
+
     void Start()
     {
         transform.position = new Vector3(0, yStart, zStart);
         ceilingLight.intensity = 0;
+
+        vids = screen.GetComponents<VideoPlayer>();
     }
 
     void Update()
     {
+        
         if (holdTimer <= 0) {
             camPanSpeed = Approach(camPanSpeed, camPanSpeedDest, camPanSpeedDest / 200);
             var newY = Approach(transform.position.y, yEnd, camPanSpeed);
             var newZ = Approach(transform.position.z, zEnd, camPanSpeed);
             transform.position = new Vector3(0, newY, newZ);
+
+            vids[0].enabled = false;
+            vids[1].enabled = true;
         }
         else {
             holdTimer--;
+            vids[0].enabled = true;
+            vids[1].enabled = false;
         }
 
         // slowly bring in light
