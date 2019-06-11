@@ -1,3 +1,5 @@
+//REF: https://github.com/Chaser324/unity-wireframe
+
 
 uniform float _WireThickness = 100;
 uniform float _WireSmoothness = 3;
