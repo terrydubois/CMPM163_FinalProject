@@ -2546,6 +2546,22 @@ MonoBehaviour:
   - {fileID: 1185943385}
   discObj: {fileID: 473334806}
   psx: {fileID: 1715706620}
+  cam: {fileID: 534669902}
+  screen: {fileID: 1107083115}
+  vidClips:
+  - {fileID: 32900000, guid: d9edd0252b736cc428116a9f9269062c, type: 3}
+  - {fileID: 32900000, guid: 4a1802220f30f4147b7af00e2bdadd88, type: 3}
+  - {fileID: 32900000, guid: 9072363abd3007c4e8b59eea22d5e1d6, type: 3}
+  - {fileID: 32900000, guid: 1e20e6d1cacdaf347a543237166c65b6, type: 3}
+  - {fileID: 32900000, guid: 429e4fde1ef102b428eef546cfd5637d, type: 3}
+  - {fileID: 32900000, guid: 2e158f8c22e8db44f97774785e72b43f, type: 3}
+  vids:
+  - {fileID: 32900000, guid: d9edd0252b736cc428116a9f9269062c, type: 3}
+  - {fileID: 32900000, guid: 4a1802220f30f4147b7af00e2bdadd88, type: 3}
+  - {fileID: 32900000, guid: 9072363abd3007c4e8b59eea22d5e1d6, type: 3}
+  - {fileID: 32900000, guid: 1e20e6d1cacdaf347a543237166c65b6, type: 3}
+  - {fileID: 32900000, guid: 429e4fde1ef102b428eef546cfd5637d, type: 3}
+  - {fileID: 32900000, guid: 2e158f8c22e8db44f97774785e72b43f, type: 3}
 --- !u!4 &1756833387
 Transform:
   m_ObjectHideFlags: 0

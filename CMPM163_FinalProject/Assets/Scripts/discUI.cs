@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class discUI : MonoBehaviour
 {
@@ -12,6 +13,17 @@ public class discUI : MonoBehaviour
     public GameObject[] discsArr;
     public GameObject discObj;
     public GameObject psx;
+    public GameObject cam;
+    public GameObject screen;
+    public VideoClip[] vidClips;
+    public VideoPlayer[] vids;
+
+    public bool newDiscSequenceInProgress;
+
+    public void Start() {
+        vids = screen.GetComponents<VideoPlayer>();
+        newDiscSequenceInProgress = false;
+    }
 
     public void Update() {
         if (discSelected >= 0) {
@@ -20,10 +32,23 @@ public class discUI : MonoBehaviour
         else {
             discSelectedObj.transform.position = new Vector3(0, -3000, 0);
         }
+
+        /*
+        // set TV to correct video clip
+        if (cam.GetComponent<openingSequence>().camSequenceOver) {
+            if (discSelected >= 0) {
+                vids[1].clip = vidClips[discSelected + 1];
+            }
+            if (discSelected < 0) {
+                vids[1].clip = vidClips[0];
+            }
+        }
+        */
+        
     }
 
     public void newDiscSequence1() {
-
+        // the starting animation of putting the disc in the console
         if (!psx.GetComponent<psxOpen>().lidOpen) {
             psx.GetComponent<psxOpen>().lidOpen = true;
             if (psx.GetComponent<psxOpen>().discIn) {
@@ -32,6 +57,7 @@ public class discUI : MonoBehaviour
             else {
                 Invoke("newDiscSequence3", 1);
             }
+            vids[1].clip = vidClips[0];
         }
     }
 
@@ -47,17 +73,27 @@ public class discUI : MonoBehaviour
 
     public void newDiscSequence4() {
         psx.GetComponent<psxOpen>().lidOpen = false;
+        Invoke("newDiscSequence5", 1);
+    }
+
+    public void newDiscSequence5() {
+        vids[1].clip = vidClips[discSelected + 1];
+        newDiscSequenceInProgress = false;
     }
 
     public void discClicked(int discIndex) {
-        if (discSelected != discIndex && !psx.GetComponent<psxOpen>().lidOpen) {
+        // click on disc
+        if (discSelected != discIndex && !psx.GetComponent<psxOpen>().lidOpen
+        && !newDiscSequenceInProgress) {
             Debug.Log("disc clicked: " + discIndex);
             discSelected = discIndex;
             newDiscSequence1();
+            newDiscSequenceInProgress = true;
         }
     }
 
     public void mouseEnter(int discIndex) {
+        // mouseover disc
         if (!psx.GetComponent<psxOpen>().lidOpen) {
             discHover.transform.position = new Vector3(
                 discsArr[discIndex].transform.position.x,
