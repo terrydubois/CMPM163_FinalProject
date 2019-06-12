@@ -19,6 +19,10 @@ public class discUI : MonoBehaviour
     public VideoClip[] vidClips;
     public VideoPlayer[] vids;
     public Sprite[] covers;
+    public AudioSource[] audioClips;
+
+    public float[] discsArrRotSpeed;
+    public float[] discsArrRotSpeedDest;
 
 
     public bool newDiscSequenceInProgress;
@@ -26,6 +30,7 @@ public class discUI : MonoBehaviour
     public void Start() {
         vids = screen.GetComponents<VideoPlayer>();
         newDiscSequenceInProgress = false;
+        audioClips = GetComponents<AudioSource>();
     }
 
     public void Update() {
@@ -44,6 +49,16 @@ public class discUI : MonoBehaviour
                 cover.GetComponent<SpriteRenderer>().sprite = covers[discSelected];
             }
         }
+
+        for (var i = 0; i < discsArrRotSpeed.Length; i++) {
+            if (discsArrRotSpeed[i] < discsArrRotSpeedDest[i]) {
+                discsArrRotSpeed[i] = ApproachSmooth(discsArrRotSpeed[i], discsArrRotSpeedDest[i], 40);
+            }
+            else if (discsArrRotSpeed[i] > discsArrRotSpeedDest[i]) {
+                discsArrRotSpeed[i] = ApproachSmooth(discsArrRotSpeed[i], discsArrRotSpeedDest[i], 12);
+            }
+            discsArr[i].transform.Rotate(new Vector3(0, 0, discsArrRotSpeed[i] * Time.deltaTime));
+        }
     }
 
     public void newDiscSequence1() {
@@ -52,11 +67,15 @@ public class discUI : MonoBehaviour
             psx.GetComponent<psxOpen>().lidOpen = true;
             if (psx.GetComponent<psxOpen>().discIn) {
                 Invoke("newDiscSequence2", 0.5f);
+                for (var i = 0; i < discsArrRotSpeed.Length; i++) {
+                    discsArrRotSpeedDest[i] = 0;
+                }
             }
             else {
                 Invoke("newDiscSequence3", 1);
             }
             vids[1].clip = vidClips[0];
+            audioClips[0].Play();
         }
     }
 
@@ -73,6 +92,10 @@ public class discUI : MonoBehaviour
     public void newDiscSequence4() {
         psx.GetComponent<psxOpen>().lidOpen = false;
         Invoke("newDiscSequence5", 1);
+        audioClips[1].Play();
+        for (var i = 0; i < discsArrRotSpeed.Length; i++) {
+            discsArrRotSpeedDest[i] = (discSelected == i) ? 2000 : 0;
+        }
     }
 
     public void newDiscSequence5() {
@@ -83,7 +106,8 @@ public class discUI : MonoBehaviour
     public void discClicked(int discIndex) {
         // click on disc
         if (discSelected != discIndex && !psx.GetComponent<psxOpen>().lidOpen
-        && !newDiscSequenceInProgress) {
+        && !newDiscSequenceInProgress
+        && cam.GetComponent<openingSequence>().camSequenceOver) {
             Debug.Log("disc clicked: " + discIndex);
             discSelected = discIndex;
             newDiscSequence1();
@@ -144,6 +168,19 @@ public class discUI : MonoBehaviour
             3000,
             discHover.transform.position.z
         );
+    }
+
+
+    // smoothly transition a value to a desired value
+    float ApproachSmooth(float value, float valueDest, float divisor)
+    {
+        if (value < valueDest) {
+            value += Mathf.Abs(value - valueDest) / divisor;
+        }
+        else if (value > valueDest) {
+            value -= Mathf.Abs(value - valueDest) / divisor;
+        }
+        return value;
     }
 
 
