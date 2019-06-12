@@ -78,6 +78,7 @@ public class discUI : MonoBehaviour
             }
             vids[1].clip = vidClips[0];
             audioClips[0].Play();
+            audioClips[1].Stop();
         }
     }
 
