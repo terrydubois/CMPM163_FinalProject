@@ -13,13 +13,16 @@ public class discUI : MonoBehaviour
     public GameObject[] discsArr;
     public GameObject discObj;
     public GameObject psx;
+    public GameObject psx_renderer;
     public GameObject cam;
     public GameObject screen;
     public GameObject cover;
+    public GameObject cover_renderer;
     public VideoClip[] vidClips;
     public VideoPlayer[] vids;
     public Sprite[] covers;
     public AudioSource[] audioClips;
+    public Material[] modelShaders;
 
     public float[] discsArrRotSpeed;
     public float[] discsArrRotSpeedDest;
@@ -43,7 +46,6 @@ public class discUI : MonoBehaviour
             discSelectedObj.transform.position = new Vector3(0, -3000, 0);
         }
         var changePos = Mathf.Abs(36 - discObj.transform.position.y);
-        Debug.Log(changePos);
         if (changePos < 1)
         {
             if (discSelected >= 0)
@@ -82,24 +84,32 @@ public class discUI : MonoBehaviour
         }
     }
 
+    // Take out previous disk
     public void newDiscSequence2() {
         psx.GetComponent<psxOpen>().discIn = false;
+        cover_renderer.GetComponent<Renderer>().material = modelShaders[0];
+        psx_renderer.GetComponent<Renderer>().material = modelShaders[0];
         Invoke("newDiscSequence3", 2f);
     }
 
+    // New disk has gotten into disk slot
     public void newDiscSequence3() {
         psx.GetComponent<psxOpen>().discIn = true;
         Invoke("newDiscSequence4", 1.5f);
     }
 
+    // Lid closing has begun
     public void newDiscSequence4() {
         psx.GetComponent<psxOpen>().lidOpen = false;
         Invoke("newDiscSequence5", 1);
         audioClips[1].Play();
     }
 
+    // Lid is closed, video is starting
     public void newDiscSequence5() {
         vids[1].clip = vidClips[discSelected + 1];
+        cover_renderer.GetComponent<Renderer>().material = modelShaders[discSelected + 1];
+        psx_renderer.GetComponent<Renderer>().material = modelShaders[discSelected + 1];
         newDiscSequenceInProgress = false;
         for (var i = 0; i < discsArrRotSpeed.Length; i++) {
             discsArrRotSpeedDest[i] = (discSelected == i) ? 2000 : 0;
@@ -132,7 +142,7 @@ public class discUI : MonoBehaviour
         }
     }
 
-
+    // WHich disk has been lciked by the user
     public void discClickedCrash() {
         discClicked(0);
     }
@@ -149,6 +159,7 @@ public class discUI : MonoBehaviour
         discClicked(4);
     }
 
+    // Which game is the mouse hovering over
     public void mouseEnterCrash() {
         mouseEnter(0);
     }
