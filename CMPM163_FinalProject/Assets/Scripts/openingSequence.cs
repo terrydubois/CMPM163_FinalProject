@@ -19,8 +19,12 @@ public class openingSequence : MonoBehaviour
     private float camPanSpeed = 0;
     public float holdTimer;
 
+    public float discsYStart;
+    public float discsYEnd;
+
     public VideoPlayer[] vids;
     public AudioSource[] ambientAudio;
+    public GameObject discs;
 
     void Start()
     {
@@ -28,6 +32,13 @@ public class openingSequence : MonoBehaviour
         ceilingLight.intensity = 0;
 
         vids = screen.GetComponents<VideoPlayer>();
+
+        // set discs to default position
+        discs.transform.position = new Vector3(
+            discs.transform.position.x,
+            discsYStart,
+            discs.transform.position.z
+        );
     }
 
     void Update()
@@ -78,6 +89,18 @@ public class openingSequence : MonoBehaviour
             holdTimer = 0;
             camPanSpeed = 1;
         }
+
+        // if camera is panned out, bring disc UI in
+        float discsYDest = discsYStart;
+        if (camSequenceOver) {
+            discsYDest = discsYEnd;
+        }
+        var discsYCurrent = Approach(discs.transform.position.y, discsYDest, 3);
+        discs.transform.position = new Vector3(
+            discs.transform.position.x,
+            discsYCurrent,
+            discs.transform.position.z
+        );
     }
     
     // transition a value to a desired value by linear speed
