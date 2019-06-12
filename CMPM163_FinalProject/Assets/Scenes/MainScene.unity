@@ -716,6 +716,7 @@ MonoBehaviour:
   - {fileID: 534669907}
   - {fileID: 534669908}
   discs: {fileID: 1780362527}
+  psx: {fileID: 1715706620}
 --- !u!82 &534669907
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2543,6 +2544,8 @@ MonoBehaviour:
   - {fileID: 206309078}
   - {fileID: 1166854948}
   - {fileID: 1185943385}
+  discObj: {fileID: 473334806}
+  psx: {fileID: 1715706620}
 --- !u!4 &1756833387
 Transform:
   m_ObjectHideFlags: 0

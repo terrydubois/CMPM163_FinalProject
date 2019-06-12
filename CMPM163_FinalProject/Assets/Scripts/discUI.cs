@@ -9,16 +9,10 @@ public class discUI : MonoBehaviour
 
     public GameObject discHover;
     public GameObject discSelectedObj;
-
     public GameObject[] discsArr;
+    public GameObject discObj;
+    public GameObject psx;
 
-/*
-    public GameObject discsArr[0];
-    public GameObject discsArr[1];
-    public GameObject discsArr[2];
-    public GameObject discsArr[3];
-    public GameObject discsArr[4];
-*/
     public void Update() {
         if (discSelected >= 0) {
             discSelectedObj.transform.position = discsArr[discSelected].transform.position;
@@ -28,65 +22,85 @@ public class discUI : MonoBehaviour
         }
     }
 
+    public void newDiscSequence1() {
+
+        if (!psx.GetComponent<psxOpen>().lidOpen) {
+            psx.GetComponent<psxOpen>().lidOpen = true;
+            if (psx.GetComponent<psxOpen>().discIn) {
+                Invoke("newDiscSequence2", 0.5f);
+            }
+            else {
+                Invoke("newDiscSequence3", 1);
+            }
+        }
+    }
+
+    public void newDiscSequence2() {
+        psx.GetComponent<psxOpen>().discIn = false;
+        Invoke("newDiscSequence3", 2f);
+    }
+
+    public void newDiscSequence3() {
+        psx.GetComponent<psxOpen>().discIn = true;
+        Invoke("newDiscSequence4", 1);
+    }
+
+    public void newDiscSequence4() {
+        psx.GetComponent<psxOpen>().lidOpen = false;
+    }
+
+    public void discClicked(int discIndex) {
+        if (discSelected != discIndex && !psx.GetComponent<psxOpen>().lidOpen) {
+            Debug.Log("disc clicked: " + discIndex);
+            discSelected = discIndex;
+            newDiscSequence1();
+        }
+    }
+
+    public void mouseEnter(int discIndex) {
+        if (!psx.GetComponent<psxOpen>().lidOpen) {
+            discHover.transform.position = new Vector3(
+                discsArr[discIndex].transform.position.x,
+                discsArr[discIndex].transform.position.y,
+                0
+            );
+        }
+        else {
+            mouseLeave();
+        }
+    }
+
+
     public void discClickedCrash() {
-        Debug.Log("crash clicked");
-        discSelected = 0;
+        discClicked(0);
     }
-
     public void discClickedSpyro() {
-        Debug.Log("spyro clicked");
-        discSelected = 1;
+        discClicked(1);
     }
-
     public void discClickedFrogger() {
-        Debug.Log("frogger clicked");
-        discSelected = 2;
+        discClicked(2);
     }
-
     public void discClickedLSD() {
-        Debug.Log("LSD clicked");
-        discSelected = 3;
+        discClicked(3);
     }
-
     public void discClickedPetscop() {
-        Debug.Log("petscop clicked");
-        discSelected = 4;
+        discClicked(4);
     }
 
     public void mouseEnterCrash() {
-        discHover.transform.position = new Vector3(
-            discsArr[0].transform.position.x,
-            discsArr[0].transform.position.y,
-            0
-        );
+        mouseEnter(0);
     }
     public void mouseEnterSpyro() {
-        discHover.transform.position = new Vector3(
-            discsArr[1].transform.position.x,
-            discsArr[1].transform.position.y,
-            0
-        );
+        mouseEnter(1);
     }
     public void mouseEnterFrogger() {
-        discHover.transform.position = new Vector3(
-            discsArr[2].transform.position.x,
-            discsArr[2].transform.position.y,
-            0
-        );
+        mouseEnter(2);
     }
     public void mouseEnterLSD() {
-        discHover.transform.position = new Vector3(
-            discsArr[3].transform.position.x,
-            discsArr[3].transform.position.y,
-            0
-        );
+        mouseEnter(3);
     }
     public void mouseEnterPetscop() {
-        discHover.transform.position = new Vector3(
-            discsArr[4].transform.position.x,
-            discsArr[4].transform.position.y,
-            0
-        );
+        mouseEnter(4);
     }
 
     public void mouseLeave() {

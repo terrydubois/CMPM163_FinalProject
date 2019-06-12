@@ -25,6 +25,7 @@ public class openingSequence : MonoBehaviour
     public VideoPlayer[] vids;
     public AudioSource[] ambientAudio;
     public GameObject discs;
+    public GameObject psx;
 
     void Start()
     {
@@ -92,7 +93,7 @@ public class openingSequence : MonoBehaviour
 
         // if camera is panned out, bring disc UI in
         float discsYDest = discsYStart;
-        if (camSequenceOver) {
+        if (camSequenceOver && !psx.GetComponent<psxOpen>().psxRot) {
             discsYDest = discsYEnd;
         }
         var discsYCurrent = Approach(discs.transform.position.y, discsYDest, 3);
