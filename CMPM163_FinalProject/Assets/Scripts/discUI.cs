@@ -95,14 +95,14 @@ public class discUI : MonoBehaviour
         psx.GetComponent<psxOpen>().lidOpen = false;
         Invoke("newDiscSequence5", 1);
         audioClips[1].Play();
-        for (var i = 0; i < discsArrRotSpeed.Length; i++) {
-            discsArrRotSpeedDest[i] = (discSelected == i) ? 2000 : 0;
-        }
     }
 
     public void newDiscSequence5() {
         vids[1].clip = vidClips[discSelected + 1];
         newDiscSequenceInProgress = false;
+        for (var i = 0; i < discsArrRotSpeed.Length; i++) {
+            discsArrRotSpeedDest[i] = (discSelected == i) ? 2000 : 0;
+        }
     }
 
     public void discClicked(int discIndex) {
