@@ -39,7 +39,6 @@ public class discUI : MonoBehaviour
         Debug.Log(changePos);
         if (changePos < 1)
         {
-            Debug.Log("covertime");
             if (discSelected >= 0)
             {
                 cover.GetComponent<SpriteRenderer>().sprite = covers[discSelected];
