@@ -15,8 +15,11 @@ public class discUI : MonoBehaviour
     public GameObject psx;
     public GameObject cam;
     public GameObject screen;
+    public GameObject cover;
     public VideoClip[] vidClips;
     public VideoPlayer[] vids;
+    public Sprite[] covers;
+
 
     public bool newDiscSequenceInProgress;
 
@@ -32,19 +35,16 @@ public class discUI : MonoBehaviour
         else {
             discSelectedObj.transform.position = new Vector3(0, -3000, 0);
         }
-
-        /*
-        // set TV to correct video clip
-        if (cam.GetComponent<openingSequence>().camSequenceOver) {
-            if (discSelected >= 0) {
-                vids[1].clip = vidClips[discSelected + 1];
-            }
-            if (discSelected < 0) {
-                vids[1].clip = vidClips[0];
+        var changePos = Mathf.Abs(36 - discObj.transform.position.y);
+        Debug.Log(changePos);
+        if (changePos < 1)
+        {
+            Debug.Log("covertime");
+            if (discSelected >= 0)
+            {
+                cover.GetComponent<SpriteRenderer>().sprite = covers[discSelected];
             }
         }
-        */
-        
     }
 
     public void newDiscSequence1() {
@@ -68,7 +68,7 @@ public class discUI : MonoBehaviour
 
     public void newDiscSequence3() {
         psx.GetComponent<psxOpen>().discIn = true;
-        Invoke("newDiscSequence4", 1);
+        Invoke("newDiscSequence4", 1.5f);
     }
 
     public void newDiscSequence4() {
