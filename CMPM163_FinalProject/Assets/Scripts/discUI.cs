@@ -31,6 +31,8 @@ public class discUI : MonoBehaviour
         vids = screen.GetComponents<VideoPlayer>();
         newDiscSequenceInProgress = false;
         audioClips = GetComponents<AudioSource>();
+
+        discHover.transform.position = new Vector3(0, -2000, 0);
     }
 
     public void Update() {
