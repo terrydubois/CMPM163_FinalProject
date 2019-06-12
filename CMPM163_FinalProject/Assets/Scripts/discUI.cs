@@ -8,11 +8,25 @@ public class discUI : MonoBehaviour
     public int discSelected = -1;
 
     public GameObject discHover;
-    public GameObject discCrash;
-    public GameObject discSpyro;
-    public GameObject discFrogger;
-    public GameObject discLSD;
-    public GameObject discPetscop;
+    public GameObject discSelectedObj;
+
+    public GameObject[] discsArr;
+
+/*
+    public GameObject discsArr[0];
+    public GameObject discsArr[1];
+    public GameObject discsArr[2];
+    public GameObject discsArr[3];
+    public GameObject discsArr[4];
+*/
+    public void Update() {
+        if (discSelected >= 0) {
+            discSelectedObj.transform.position = discsArr[discSelected].transform.position;
+        }
+        else {
+            discSelectedObj.transform.position = new Vector3(0, -3000, 0);
+        }
+    }
 
     public void discClickedCrash() {
         Debug.Log("crash clicked");
@@ -41,36 +55,36 @@ public class discUI : MonoBehaviour
 
     public void mouseEnterCrash() {
         discHover.transform.position = new Vector3(
-            discCrash.transform.position.x,
-            discCrash.transform.position.y,
+            discsArr[0].transform.position.x,
+            discsArr[0].transform.position.y,
             0
         );
     }
     public void mouseEnterSpyro() {
         discHover.transform.position = new Vector3(
-            discSpyro.transform.position.x,
-            discSpyro.transform.position.y,
+            discsArr[1].transform.position.x,
+            discsArr[1].transform.position.y,
             0
         );
     }
     public void mouseEnterFrogger() {
         discHover.transform.position = new Vector3(
-            discFrogger.transform.position.x,
-            discFrogger.transform.position.y,
+            discsArr[2].transform.position.x,
+            discsArr[2].transform.position.y,
             0
         );
     }
     public void mouseEnterLSD() {
         discHover.transform.position = new Vector3(
-            discLSD.transform.position.x,
-            discLSD.transform.position.y,
+            discsArr[3].transform.position.x,
+            discsArr[3].transform.position.y,
             0
         );
     }
     public void mouseEnterPetscop() {
         discHover.transform.position = new Vector3(
-            discPetscop.transform.position.x,
-            discPetscop.transform.position.y,
+            discsArr[4].transform.position.x,
+            discsArr[4].transform.position.y,
             0
         );
     }
@@ -82,4 +96,6 @@ public class discUI : MonoBehaviour
             discHover.transform.position.z
         );
     }
+
+
 }
