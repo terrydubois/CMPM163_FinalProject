@@ -59,14 +59,16 @@ public class psxOpen : MonoBehaviour
                 if (psxRot) {
                     psxRot = false;
                 }
+                /*
                 else {
                     lidOpen = !lidOpen;
                 }
+                */
             }
 
-            if (Input.GetKeyDown(KeyCode.Space) && lidOpen) {
-                discIn = !discIn;
-            }
+            //if (Input.GetKeyDown(KeyCode.Space) && lidOpen) {
+            //    discIn = !discIn;
+            //}
         }
 
 
