@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
+using UnityEngine.UI;
 
 public class openingSequence : MonoBehaviour
 {
@@ -27,7 +28,7 @@ public class openingSequence : MonoBehaviour
     public AudioSource[] ambientAudio;
     public GameObject discs;
     public GameObject psx;
-    public GameObject hideButton;
+    public Button hideButton;
 
     void Start()
     {
@@ -44,6 +45,7 @@ public class openingSequence : MonoBehaviour
         );
 
         Invoke("panOutTrue", 15.5f);
+        //hideButton.gameObject.SetActive(false);
     }
 
     void panOutTrue() {
@@ -101,7 +103,7 @@ public class openingSequence : MonoBehaviour
         }
 
         // if camera is panned out, bring disc UI in
-        if (discs.transform.position.y != discsYEnd && hideButton.activeInHierarchy != true)
+        if (discs.transform.position.y != discsYEnd && hideButton.GetComponent<hideDiscs>().getHide() != true)
         {
             float discsYDest = discsYStart;
             if (camSequenceOver && !psx.GetComponent<psxOpen>().psxRot)
@@ -115,9 +117,9 @@ public class openingSequence : MonoBehaviour
                 discs.transform.position.z
             );
         }
-        else if(discs.transform.position.y == discsYEnd && hideButton.activeInHierarchy != true)
+        else if(discs.transform.position.y == discsYEnd && hideButton.GetComponent<hideDiscs>().getActive() != true)
         {
-            hideButton.SetActive(true);
+            hideButton.GetComponent<hideDiscs>().toggleActive();
         }
     }
     

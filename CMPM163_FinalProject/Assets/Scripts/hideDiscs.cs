@@ -8,6 +8,7 @@ public class hideDiscs : MonoBehaviour
     public GameObject discs;
     public float discsYStart;
     public float discsYEnd;
+    public bool active = false;
 
     // Start is called before the first frame update
     void Start()
@@ -18,22 +19,43 @@ public class hideDiscs : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float discsYDest = discsYEnd;
-        if (hide)
+        if (active)
         {
-            discsYDest = discsYStart;
-        }
-        var discsYCurrent = Approach(discs.transform.position.y, discsYDest, 3);
-        discs.transform.position = new Vector3(
-            discs.transform.position.x,
-            discsYCurrent,
-            discs.transform.position.z
+            float discsYDest = discsYEnd;
+            if (hide)
+            {
+                discsYDest = discsYStart;
+            }
+            var discsYCurrent = Approach(discs.transform.position.y, discsYDest, 3);
+            discs.transform.position = new Vector3(
+                discs.transform.position.x,
+                discsYCurrent,
+                discs.transform.position.z
 
-        );
+            );
+        }
     }
     public void toggleHide()
     {
-        hide = !hide;
+        if (active)
+        {
+            hide = !hide;
+        }
+    }
+
+    public void toggleActive()
+    {
+        active = true;
+    }
+
+    public bool getActive()
+    {
+        return active;
+    }
+
+    public bool getHide()
+    {
+        return hide;
     }
 
     // transition a value to a desired value by linear speed
