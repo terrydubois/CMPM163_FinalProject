@@ -40,6 +40,7 @@ public class discUI : MonoBehaviour
     }
 
     public void Update() {
+        // update position of disc-selected highlight UI obj
         if (discSelected >= 0) {
             discSelectedObj.transform.position = discsArr[discSelected].transform.position;
         }
@@ -52,6 +53,7 @@ public class discUI : MonoBehaviour
             cover.GetComponent<SpriteRenderer>().sprite = covers[discSelected];
         }
 
+        // update speed that each disc UI is rotating at
         for (var i = 0; i < discsArrRotSpeed.Length; i++) {
             if (discsArrRotSpeed[i] < discsArrRotSpeedDest[i]) {
                 discsArrRotSpeed[i] = ApproachSmooth(discsArrRotSpeed[i], discsArrRotSpeedDest[i], 40);
@@ -64,6 +66,7 @@ public class discUI : MonoBehaviour
     }
 
     public void switchDiscCover() {
+        // switch the labels on the disc
         cover.GetComponent<SpriteRenderer>().sprite = covers[discSelected];
     }
 
@@ -106,7 +109,7 @@ public class discUI : MonoBehaviour
     public void newDiscSequence4() {
         psx.GetComponent<psxOpen>().lidOpen = false;
         Invoke("newDiscSequence5", 1);
-        audioClips[1].Play();
+        
     }
 
     // Lid is closed, video is starting
@@ -114,14 +117,15 @@ public class discUI : MonoBehaviour
         vids[1].clip = vidClips[discSelected + 1];
         cover_renderer.GetComponent<Renderer>().material = modelShaders[discSelected + 1];
         psx_renderer.GetComponent<Renderer>().material = modelShaders[discSelected + 1];
-        if ((discSelected + 1) == 2)
-        {
+        if ((discSelected + 1) == 2) {
             particleChange(true);
         }
         newDiscSequenceInProgress = false;
+        // tell selected disc to start spinning
         for (var i = 0; i < discsArrRotSpeed.Length; i++) {
             discsArrRotSpeedDest[i] = (discSelected == i) ? 2000 : 0;
         }
+        audioClips[1].Play();
     }
 
     public void discClicked(int discIndex) {
@@ -184,6 +188,7 @@ public class discUI : MonoBehaviour
         mouseEnter(4);
     }
 
+    // hide UI effect when mouse leaves disc UI image
     public void mouseLeave() {
         discHover.transform.position = new Vector3(
             discHover.transform.position.x,
@@ -207,27 +212,13 @@ public class discUI : MonoBehaviour
 
     private void particleChange(bool active)
     {
-        
-        //{
-            for (int i = 0; i < fireParticles.Length; i++)
-            {
-                if (fireParticles[i].activeInHierarchy != active)
-                {
-                    fireParticles[i].SetActive(active);
-                }
-            }
-       // }
-       /* else
+        for (int i = 0; i < fireParticles.Length; i++)
         {
-            Debug.Log("else");
-            for (int i = 0; i < fireParticles.Length; i++)
+            if (fireParticles[i].activeInHierarchy != active)
             {
-                if (!fireParticles[i].activeInHierarchy)
-                {
-                    fireParticles[i].SetActive(true);
-                }
+                fireParticles[i].SetActive(active);
             }
-        }*/
+        }
     }
 
 

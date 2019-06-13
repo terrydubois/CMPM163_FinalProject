@@ -43,7 +43,7 @@ Shader "Custom/ScreenCurve"
 
         v2f vert(appdata v)
         {
-            // curve vertices according to functinos in CurvedScreen.cginc
+            // curve vertices according to functions in CurvedScreen.cginc
             v2f o;
             CurvedScreenVertex(v.vertex.xyz, _Radius, CurvedScreenGetWidth(), _Thickness);
             o.vertex = UnityObjectToClipPos(v.vertex);
@@ -54,6 +54,7 @@ Shader "Custom/ScreenCurve"
 
         fixed4 frag(v2f i) : SV_Target
         {
+            // get and return color of texel
             fixed4 col = tex2D(_MainTex, i.uv) * _Color;
             UNITY_APPLY_FOG(i.fogCoord, col);
             return col;
