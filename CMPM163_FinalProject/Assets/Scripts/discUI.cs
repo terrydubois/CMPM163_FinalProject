@@ -46,13 +46,10 @@ public class discUI : MonoBehaviour
         else {
             discSelectedObj.transform.position = new Vector3(0, -3000, 0);
         }
+
         var changePos = Mathf.Abs(36 - discObj.transform.position.y);
-        if (changePos < 1)
-        {
-            if (discSelected >= 0)
-            {
-                cover.GetComponent<SpriteRenderer>().sprite = covers[discSelected];
-            }
+        if (changePos < 1 && discSelected >= 0) {
+            cover.GetComponent<SpriteRenderer>().sprite = covers[discSelected];
         }
 
         for (var i = 0; i < discsArrRotSpeed.Length; i++) {
@@ -64,6 +61,10 @@ public class discUI : MonoBehaviour
             }
             discsArr[i].transform.Rotate(new Vector3(0, 0, discsArrRotSpeed[i] * Time.deltaTime));
         }
+    }
+
+    public void switchDiscCover() {
+        cover.GetComponent<SpriteRenderer>().sprite = covers[discSelected];
     }
 
     public void newDiscSequence1() {
@@ -92,6 +93,7 @@ public class discUI : MonoBehaviour
         psx_renderer.GetComponent<Renderer>().material = modelShaders[0];
         particleChange(false);
         Invoke("newDiscSequence3", 2f);
+        Invoke("switchDiscCover", 1f);
     }
 
     // New disk has gotten into disk slot
