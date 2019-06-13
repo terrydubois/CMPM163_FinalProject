@@ -43,7 +43,6 @@ public class discUI : MonoBehaviour
             discSelectedObj.transform.position = new Vector3(0, -3000, 0);
         }
         var changePos = Mathf.Abs(36 - discObj.transform.position.y);
-        Debug.Log(changePos);
         if (changePos < 1)
         {
             if (discSelected >= 0)
