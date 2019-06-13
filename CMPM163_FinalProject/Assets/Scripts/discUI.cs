@@ -23,6 +23,7 @@ public class discUI : MonoBehaviour
     public Sprite[] covers;
     public AudioSource[] audioClips;
     public Material[] modelShaders;
+    public GameObject[] fireParticles;
 
     public float[] discsArrRotSpeed;
     public float[] discsArrRotSpeedDest;
@@ -89,6 +90,7 @@ public class discUI : MonoBehaviour
         psx.GetComponent<psxOpen>().discIn = false;
         cover_renderer.GetComponent<Renderer>().material = modelShaders[0];
         psx_renderer.GetComponent<Renderer>().material = modelShaders[0];
+        particleChange(false);
         Invoke("newDiscSequence3", 2f);
     }
 
@@ -110,6 +112,10 @@ public class discUI : MonoBehaviour
         vids[1].clip = vidClips[discSelected + 1];
         cover_renderer.GetComponent<Renderer>().material = modelShaders[discSelected + 1];
         psx_renderer.GetComponent<Renderer>().material = modelShaders[discSelected + 1];
+        if ((discSelected + 1) == 2)
+        {
+            particleChange(true);
+        }
         newDiscSequenceInProgress = false;
         for (var i = 0; i < discsArrRotSpeed.Length; i++) {
             discsArrRotSpeedDest[i] = (discSelected == i) ? 2000 : 0;
@@ -195,6 +201,31 @@ public class discUI : MonoBehaviour
             value -= Mathf.Abs(value - valueDest) / divisor;
         }
         return value;
+    }
+
+    private void particleChange(bool active)
+    {
+        
+        //{
+            for (int i = 0; i < fireParticles.Length; i++)
+            {
+                if (fireParticles[i].activeInHierarchy != active)
+                {
+                    fireParticles[i].SetActive(active);
+                }
+            }
+       // }
+       /* else
+        {
+            Debug.Log("else");
+            for (int i = 0; i < fireParticles.Length; i++)
+            {
+                if (!fireParticles[i].activeInHierarchy)
+                {
+                    fireParticles[i].SetActive(true);
+                }
+            }
+        }*/
     }
 
 

@@ -732,7 +732,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &336866360
 Transform:
   m_ObjectHideFlags: 0
@@ -6311,7 +6311,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &803761483
 Transform:
   m_ObjectHideFlags: 0
@@ -12730,6 +12730,9 @@ MonoBehaviour:
   - {fileID: 2100000, guid: f5ef3783bb0272447945b8afc544aaaf, type: 2}
   - {fileID: 2100000, guid: 8747a0f2ee270f84c9498e51a5eb3cdf, type: 2}
   - {fileID: 2100000, guid: 8747a0f2ee270f84c9498e51a5eb3cdf, type: 2}
+  fireParticles:
+  - {fileID: 803761482}
+  - {fileID: 336866359}
   discsArrRotSpeed:
   - 0
   - 0
