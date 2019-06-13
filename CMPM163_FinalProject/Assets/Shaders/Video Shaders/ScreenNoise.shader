@@ -1,7 +1,9 @@
-﻿Shader "Custom/ScreenNoise" {
+﻿// Original source: https://github.com/staffantan/unity-vhsglitch
+
+Shader "Custom/ScreenNoise" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
-		_VHSTex ("Base (RGB)", 2D) = "white" {}
+		_NoiseSourceTex ("Base (RGB)", 2D) = "white" {}
 	}
 
 	SubShader {
@@ -16,7 +18,7 @@
 			#include "UnityCG.cginc"
 
 			uniform sampler2D _MainTex;
-			uniform sampler2D _VHSTex;
+			uniform sampler2D _NoiseSourceTex;
 			
 			float _yScanline;
 			float _xScanline;
@@ -25,7 +27,7 @@
 			}
  
 			fixed4 frag (v2f_img i) : COLOR{
-				fixed4 vhs = tex2D (_VHSTex, i.uv);
+				fixed4 vhs = tex2D (_NoiseSourceTex, i.uv);
 				
 				float dx = 1-abs(distance(i.uv.y, _xScanline));
 				float dy = 1-abs(distance(i.uv.y, _yScanline));
