@@ -29,7 +29,7 @@ public class ApplyScreenNoise : MonoBehaviour
 
 	void Start()
 	{
-		// 
+		// set material to be playing glitch source video
 		_material = new Material(shader);
 		_player = GetComponent<VideoPlayer>();
 		_player.isLooping = true;
