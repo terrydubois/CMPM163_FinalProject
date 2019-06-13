@@ -26,6 +26,7 @@ public class openingSequence : MonoBehaviour
     public AudioSource[] ambientAudio;
     public GameObject discs;
     public GameObject psx;
+    public GameObject hideButton;
 
     void Start()
     {
@@ -92,16 +93,24 @@ public class openingSequence : MonoBehaviour
         }
 
         // if camera is panned out, bring disc UI in
-        float discsYDest = discsYStart;
-        if (camSequenceOver && !psx.GetComponent<psxOpen>().psxRot) {
-            discsYDest = discsYEnd;
+        if (discs.transform.position.y != discsYEnd && hideButton.activeInHierarchy != true)
+        {
+            float discsYDest = discsYStart;
+            if (camSequenceOver && !psx.GetComponent<psxOpen>().psxRot)
+            {
+                discsYDest = discsYEnd;
+            }
+            var discsYCurrent = Approach(discs.transform.position.y, discsYDest, 3);
+            discs.transform.position = new Vector3(
+                discs.transform.position.x,
+                discsYCurrent,
+                discs.transform.position.z
+            );
         }
-        var discsYCurrent = Approach(discs.transform.position.y, discsYDest, 3);
-        discs.transform.position = new Vector3(
-            discs.transform.position.x,
-            discsYCurrent,
-            discs.transform.position.z
-        );
+        else if(discs.transform.position.y == discsYEnd && hideButton.activeInHierarchy != true)
+        {
+            hideButton.SetActive(true);
+        }
     }
     
     // transition a value to a desired value by linear speed

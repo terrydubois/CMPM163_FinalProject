@@ -15,7 +15,7 @@ Shader "Custom/CD"
     }
     SubShader
     {
-		Tags { "RenderType" = "Opaque" }//"LightMode" = "ForwardAdd" }
+		Tags { "RenderType" = "Opaque"}// "LightMode" = "Always" }
 		//Blend One One //Turn on additive blending if you have more than one point light
         LOD 200
 
