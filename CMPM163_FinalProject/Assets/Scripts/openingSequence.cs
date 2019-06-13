@@ -18,6 +18,7 @@ public class openingSequence : MonoBehaviour
     public float camPanSpeedDest = 0.04f;
     private float camPanSpeed = 0;
     public float holdTimer;
+    public bool panOut = false;
 
     public float discsYStart;
     public float discsYEnd;
@@ -40,12 +41,18 @@ public class openingSequence : MonoBehaviour
             discsYStart,
             discs.transform.position.z
         );
+
+        Invoke("panOutTrue", 15.5f);
+    }
+
+    void panOutTrue() {
+        panOut = true;
     }
 
     void Update()
     {
         
-        if (holdTimer <= 0) {
+        if (panOut || holdTimer <= 0) {
             camPanSpeed = Approach(camPanSpeed, camPanSpeedDest, camPanSpeedDest / 200);
             var newY = Approach(transform.position.y, yEnd, camPanSpeed);
             var newZ = Approach(transform.position.z, zEnd, camPanSpeed);
@@ -62,6 +69,7 @@ public class openingSequence : MonoBehaviour
                 ambientAudio[0].volume = 1;
             }
             ambientAudio[1].volume = ambientAudio[0].volume;
+            holdTimer = 0;
         }
         else {
             holdTimer--;
