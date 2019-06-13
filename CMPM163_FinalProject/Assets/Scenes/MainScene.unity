@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.0039994386, g: 0.00021815923, b: 0.000000051747882,
+  m_IndirectSpecularColor: {r: 0.003999436, g: 0.00021815892, b: 0.000000051747882,
     a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
@@ -847,7 +847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shader: {fileID: 4800000, guid: b4dcfa039faa0f8419bac7f08c0bcf5d, type: 3}
-  VHSClip: {fileID: 32900000, guid: 49df0af71ff30fb48bd9e53c05a8001c, type: 3}
+  noiseSourceVideo: {fileID: 32900000, guid: 49df0af71ff30fb48bd9e53c05a8001c, type: 3}
   xScanlineAmp: 0
   yScanlineAmp: 0.1
 --- !u!328 &329685432
