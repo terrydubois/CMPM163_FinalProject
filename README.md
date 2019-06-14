@@ -1,6 +1,8 @@
 # CMPM163_FinalProject
 Final Project for CMPM 163
 
+Link to highlight video: https://youtu.be/QH5-X4V-3EE
+
 The Lanky Boys are: Brady Moore, Shader Programmer and Modeler. Terry DuBois, Scene building and Post-Processing Programmer. And Georgio Klironomos, Shader Programmer.
 
 Once the executable is opened, the user will be greeted with the Playstation One's console intro. Once that is finished playing, the camera will pan out to reveal a floating model of the console.
